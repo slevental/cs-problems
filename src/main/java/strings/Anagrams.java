@@ -6,6 +6,8 @@ import java.util.Scanner;
  * Created by Stas on 8/5/15.
  */
 public class Anagrams {
+    public static final int ABC = 'z' - 'a' + 1;
+
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
         System.out.println(anagramEditDistance(scanner.nextLine(), scanner.nextLine()));
@@ -22,7 +24,7 @@ public class Anagrams {
     }
 
     private static char[] countChars(String str) {
-        char[] chars = new char['z' - 'a' + 1];
+        char[] chars = new char[ABC];
         for (int i = 0; i < str.length(); i++) {
             chars[str.charAt(i) - 'a']++;
         }
