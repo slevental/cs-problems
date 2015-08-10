@@ -17,7 +17,7 @@ public class BigFactorial {
 
     static BigInteger calcFactorial(int n) {
         BigInteger res = BigInteger.ONE;
-        for (int i = 2; i < n; i++)
+        for (int i = 1; i <= n; i++)
             res = res.multiply(valueOf(i));
         return res;
     }
