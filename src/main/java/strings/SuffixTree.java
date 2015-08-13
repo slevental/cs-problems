@@ -19,6 +19,24 @@ public class SuffixTree {
         }
     }
 
+    public int find(String str) {
+        int pos = alphabet.pos(str.charAt(0));
+        return find(nodes[pos], str, 0);
+    }
+
+    private int find(Node node, String str, int hi) {
+        if (node == null) return -1;
+        int lo = 0;
+        while (lo < Math.min(node.text.length(), str.length() - hi)
+                && str.charAt(hi + lo) == node.text.charAt(lo))
+            lo++;
+        if (hi + lo == str.length())
+            return node.pos;
+
+        int idx = alphabet.pos(str.charAt(hi + lo));
+        return find(node.children[idx], str, hi + lo);
+    }
+
     private Node add(Node n, String str, int pos) {
         if (n == null)
             return new Node(str, pos, new Node[alphabet.size()]);
