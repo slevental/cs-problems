@@ -24,11 +24,9 @@ public class NameTheRabbit {
         }
 
         int score() {
-            if (score == 0) {
-                for (int i = 0; i < str.length(); i++) {
+            if (score == 0)
+                for (int i = 0; i < str.length(); i++)
                     score += str.charAt(i) - 'a' + 1;
-                }
-            }
             return score;
         }
 
