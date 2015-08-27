@@ -46,12 +46,6 @@ public class BreadingProblem {
      * R(2) = 2
      * R(2n) = R(n) + R(n + 1) + n (for n > 1)
      * R(2n + 1) = R(n - 1) + R(n) + 1 (for n >= 1)
-     * <p>
-     * R(N) = R(N/2) + R
-     * <p>
-     * ( R(N/2) + R(N/2 + 1) + N/2, N%2 == 0
-     * R(N) = <
-     * ( R((N-1)/2-1) + R((N-1)/2) + 1, N%2 == 1
      */
     static BigInteger R(BigInteger n, Map<BigInteger, BigInteger> buff) {
         if (n.compareTo(TWO) < 0) return BigInteger.ONE;
@@ -67,10 +61,5 @@ public class BreadingProblem {
         }
         buff.put(n, b);
         return b;
-    }
-
-    public static void main(String[] args) {
-        for (BigInteger n = ONE; n.compareTo(BigInteger.valueOf(1000)) < 0; n = n.add(ONE))
-            System.out.println("N=" + n + " : R(n) = " + R(n, new HashMap<>()));
     }
 }
