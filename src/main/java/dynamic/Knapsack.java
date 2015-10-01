@@ -20,26 +20,16 @@ public class Knapsack {
             int[] arr = new int[arrLen];
             for (int i = 0; i < arrLen; i++)
                 arr[i] = scanner.nextInt();
-
-            int res = fit(arr, reqSum);
+            int res = fit(arr, 0, reqSum, new HashMap<>(), 0);
             System.out.println(res);
         }
     }
 
-    static int fit(int[] arr, int sum) {
-        int f = 0;
-        Map<Integer, Integer> memo = new HashMap<>();
-        for (int i = 0; i < arr.length; i++) f = Math.max(f, fit(arr, i, sum, memo));
-        return f;
-    }
-
-    private static int fit(int[] arr, int pos, int sum, Map<Integer, Integer> memo) {
-        sum -= arr[pos];
+    static int fit(int[] arr, int delta, int sum, Map<Integer, Integer> memo, int fit) {
         if (memo.containsKey(sum)) return memo.get(sum);
-        if (sum < 0) return 0;
-        int fit = 0;
-        for (int i = 0; i < arr.length; i++) fit = Math.max(fit, fit(arr, i, sum, memo));
+        if ((sum -= delta) < 0) return 0;
+        for (int i = 0; i < arr.length; i++) fit = Math.max(fit, fit(arr, arr[i], sum, memo, 0));
         memo.put(sum, fit);
-        return fit + arr[pos];
+        return fit + delta;
     }
 }
