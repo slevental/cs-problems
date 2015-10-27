@@ -22,7 +22,7 @@ public class InsertionSortTest {
             arr[i] = x;
             arr2[i] = x;
         }
-        InsertionSortt.sort(arr);
+        InsertionSort.sort(arr);
         Arrays.sort(arr2);
 
         assertArrayEquals(arr, arr2);

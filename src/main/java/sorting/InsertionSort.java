@@ -3,7 +3,7 @@ package sorting;
 /**
  * Created by Stas on 8/12/15.
  */
-public class InsertionSortt {
+public class InsertionSort {
 
     public static void sort(int[] arr) {
         for (int i = 1; i < arr.length; i++) {
