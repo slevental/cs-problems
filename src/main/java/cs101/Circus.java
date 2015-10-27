@@ -1,11 +1,7 @@
 package cs101;
 
-import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
-import java.util.stream.IntStream;
-
-import static java.util.Arrays.fill;
 
 /**
  * Created by Stas on 10/8/15.
@@ -14,24 +10,33 @@ public class Circus {
     public static int tower(List<Person> persons) {
         Collections.sort(persons);
 
-        int[] ints = new int[persons.size()];
-        fill(ints, -1);
-
-        longest(persons, 0, ints);
-
-        return IntStream.of(ints).max().getAsInt();
+        Person[] path = new Person[persons.size()];
+        int len = 1;
+        path[0] = persons.get(0);
+        for (int i = 1; i < persons.size(); i++) {
+            Person el = persons.get(i);
+            if (el.less(path[0]))
+                path[0] = el;
+            else if (path[len - 1].less(el))
+                path[len++] = el;
+            else {
+                int pos = ceil(path, -1, len - 1, el);
+                if (pos < 0) continue;
+                path[pos] = el;
+            }
+        }
+        return len;
     }
 
-    private static int longest(List<Person> persons, int from, int[] memo) {
-        int res = memo[from];
-        if (res >= 0) return res;
-        if (from == persons.size() - 1) return 1;
-        int longest = longest(persons, from + 1, memo);
-        int l = 0;
-        if (persons.get(from).compareTo(persons.get(from + 1)) < 0)
-            l = longest + 1;
-        memo[from] = l;
-        return l;
+    static int ceil(Person path[], int l, int r, Person key) {
+        int m;
+        while (r - l > 1) {
+            m = l + (r - l) / 2;
+            if (key.less(path[m])) r = m;
+            else if (path[m].less(key)) l = m;
+            else return -1;
+        }
+        return -1;
     }
 
     static class Person implements Comparable {
@@ -51,6 +56,10 @@ public class Circus {
             int w = this.weight - that.weight;
             if (w != 0) return w;
             return 0;
+        }
+
+        public boolean less(Person p) {
+            return this.height - p.height < 0 && this.weight - p.weight < 0;
         }
     }
 }
