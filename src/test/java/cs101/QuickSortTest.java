@@ -1,6 +1,7 @@
 package cs101;
 
 import org.junit.Test;
+import sorting.QuickSort;
 
 import java.util.Arrays;
 import java.util.Random;
