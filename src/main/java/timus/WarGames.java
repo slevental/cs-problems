@@ -96,6 +96,29 @@ public class WarGames {
                 return find(0, pos, v - s);
         }
 
+        private int find0(int lo, int hi, int val) {
+            int from  = lo;
+            lo--;
+            hi++;
+
+            while (lo + 1 != hi) {
+                //avoid overflow.  See here
+                int  middle = (lo + hi) >>> 1;
+                int v = get(from, middle);
+                if (v < val) {
+                    lo = middle;
+                } else {
+                    hi = middle;
+                }
+            }
+
+            if (lo < size && get(from, hi) == val) {
+                return hi;
+            } else {
+                return -1;
+            }
+        }
+
         private int find(int lo, int hi, int val) {
             int from = lo;
             while (lo <= hi) {
