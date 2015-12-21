@@ -24,12 +24,7 @@ public class Squares {
             in.read(chars[i]);
             in.readLine();
         }
-        in = null;
-        nm = null;
-
-        System.gc();
         Coordinates c = lcs(chars);
-
         if (c == null)
             System.out.println(0);
         else {
@@ -101,10 +96,6 @@ public class Squares {
                 if (c != null) return c;
             }
         }
-
-        tmp = null;
-        System.gc();
-
         return null;
     }
 
@@ -140,8 +131,6 @@ public class Squares {
                 if (hash[i][j] < 0) hash[i][j] += q;
             }
         }
-
-        System.gc();
 
         return hash;
     }
