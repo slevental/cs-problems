@@ -45,8 +45,6 @@ public class Squares {
                 result = lcs;
                 result.k = k;
                 lo = k + 1;
-
-                System.gc();
             } else {
                 hi = k - 1;
             }
